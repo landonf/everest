@@ -2,8 +2,8 @@ declare -A hashes
 declare -A branches
 hashes[FStar]=69c32106a06420348c9fa5d818211a0675bfb6dc
 branches[FStar]=master
-hashes[hacl-star]=02105ae256b2e5da6929e33a40ddd94788c07ec4
-branches[hacl-star]=master
+hashes[hacl-star]=e808e1383c52a22bb880d68f2129c22c29453c54
+branches[hacl-star]=_taramana_ubuntu_focal
 hashes[kremlin]=4c31087dc5900786aaadc6e6ad25cf24c0ccde81
 branches[kremlin]=master
 hashes[mitls-fstar]=818ea4d206cff512277b90dfc532dca760355ff4
