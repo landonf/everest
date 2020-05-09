@@ -1051,7 +1051,7 @@ build_hacl () {
   # deleting these, make would think that Makefile.basic is more recent than the
   # source files.
   rm -rf hacl-star/dist/*/{Makefile.basic,package.json}
-  make -C hacl-star $make_opts
+  LD_LIBRARY_PATH= make -C hacl-star $make_opts
 }
 
 build_mitls () {
