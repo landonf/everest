@@ -92,15 +92,17 @@ function everest_move() {
 
     local msg=""
     local windows_opt=""
+    local drop_qbuild_opt=""
     if [[ "$OS" == "Windows_NT" ]]; then
         windows_opt="-windows"
+        drop_qbuild_opt="drop qbuild"
     fi
     if ! $fresh; then
         # Bail out early if there's nothing to do
         MsgToSlack=":information_source: *Nightly Everest Upgrade ($CI_BRANCH):* nothing to upgrade"
         echo "MsgToSlack content: $MsgToSlack"
         echo $MsgToSlack >$slack_file
-    elif ! ./everest --yes -j $threads $windows_opt make test verify drop qbuild; then
+    elif ! ./everest --yes -j $threads $windows_opt make test verify $drop_qbuild_opt ; then
         # Provide a meaningful summary of what we tried
         msg=":no_entry: *Nightly Everest Upgrade ($CI_BRANCH):* upgrading each project to its latest version breaks the build\n$versions"
         MsgToSlack="$msg"
