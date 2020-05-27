@@ -1,7 +1,7 @@
 declare -A hashes
 declare -A branches
-hashes[FStar]=f675047186fd0e6f4b0f6dd41fc1838c759f8912
-branches[FStar]=master
+hashes[FStar]=62287c1e4c058cbafdf8828d1859132f07d3e1e7
+branches[FStar]=_aseem_steel_framing
 hashes[hacl-star]=092e9f9a6e6ef936407ac0cdcd056c92a3e8ae03
 branches[hacl-star]=master
 hashes[kremlin]=7bd4559ade655e106d1f4a7137ae570eee534fe5
