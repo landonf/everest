@@ -1123,6 +1123,7 @@ do_test () {
   # (cd mitls-fstar/apps/quicMinusNet && make $keep_going_opt test)
   # set +x
   # separator
+  true
 }
 
 do_verify () {
