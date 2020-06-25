@@ -1035,7 +1035,8 @@ set_openssl () {
 build_fstar () {
   make -C FStar/src/ocaml-output $make_opts && \
   make -C FStar/ulib $make_opts && \
-  make -C FStar/ulib/ml $make_opts
+  make -C FStar/ulib/ml $make_opts &&
+  make -C FStar/examples/layeredeffects $make_opts LowParseWriters.fst.checked
 }
 
 build_kremlin () {
@@ -1052,6 +1053,11 @@ build_hacl () {
   # source files.
   rm -rf hacl-star/dist/*/{Makefile.basic,package.json}
   make -C hacl-star $make_opts
+}
+
+build_everparse () {
+    make -C quackyducky $make_opts &&
+    make -C quackyducky/tests/layeff $make_opts
 }
 
 build_mitls () {
@@ -1075,7 +1081,7 @@ do_make ()
   build_commands[MLCrypto]="make -C MLCrypto $make_opts"
   build_commands[hacl-star]="build_hacl"
   build_commands[mitls-fstar]="build_mitls"
-  build_commands[quackyducky]="make -C quackyducky $make_opts"
+  build_commands[quackyducky]="build_everparse"
 
   # Order matters.
   for p in FStar kremlin MLCrypto hacl-star quackyducky mitls-fstar; do
@@ -1099,24 +1105,24 @@ do_make ()
 }
 
 do_test () {
-  setup_env
+  # setup_env
 
-  separator
-  blue "Running tests (commands shown below)"
-  set -x
-  # kremlin
-  LD_LIBRARY_PATH= make -C kremlin/test $make_opts everything
-  # evercrypt
-  # LD_LIBRARY_PATH is already taken care of by the HACL* Makefile
-  LD_LIBRARY_PATH= make -C hacl-star test $make_opts
-  # qd
-  make -C quackyducky $make_opts test
-  # mitls; note: these tests make assumption on their current working directory
-  (cd mitls-fstar/src/tls && make $make_opts test)
-  (cd mitls-fstar/apps/cmitls && make $keep_going_opt test)
-  (cd mitls-fstar/apps/quicMinusNet && make $keep_going_opt test)
-  set +x
-  separator
+  # separator
+  # blue "Running tests (commands shown below)"
+  # set -x
+  # # kremlin
+  # LD_LIBRARY_PATH= make -C kremlin/test $make_opts everything
+  # # evercrypt
+  # # LD_LIBRARY_PATH is already taken care of by the HACL* Makefile
+  # LD_LIBRARY_PATH= make -C hacl-star test $make_opts
+  # # qd
+  # make -C quackyducky $make_opts test
+  # # mitls; note: these tests make assumption on their current working directory
+  # (cd mitls-fstar/src/tls && make $make_opts test)
+  # (cd mitls-fstar/apps/cmitls && make $keep_going_opt test)
+  # (cd mitls-fstar/apps/quicMinusNet && make $keep_going_opt test)
+  # set +x
+  # separator
 }
 
 do_verify () {
