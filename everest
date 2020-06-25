@@ -1034,15 +1034,15 @@ set_openssl () {
 
 build_fstar () {
   make -C FStar/src/ocaml-output $make_opts && \
-  make -C FStar/ulib $make_opts && \
+  env OTHERFLAGS='--admit_smt_queries true' make -C FStar/ulib $make_opts && \
   make -C FStar/ulib/ml $make_opts &&
   make -C FStar/examples/layeredeffects $make_opts LowParseWriters.fst.checked
 }
 
 build_kremlin () {
   # TODO: run the kremlin testsuite too
-  make -C kremlin $make_opts &&
-  make -C kremlin/kremlib $make_opts
+  env OTHERFLAGS='--admit_smt_queries true' make -C kremlin $make_opts &&
+  env OTHERFLAGS='--admit_smt_queries true' make -C kremlin/kremlib $make_opts
 }
 
 build_hacl () {
@@ -1052,11 +1052,11 @@ build_hacl () {
   # deleting these, make would think that Makefile.basic is more recent than the
   # source files.
   rm -rf hacl-star/dist/*/{Makefile.basic,package.json}
-  make -C hacl-star $make_opts
+  OTHERFLAGS='--admit_smt_queries true' make -C hacl-star $make_opts
 }
 
 build_everparse () {
-    make -C quackyducky $make_opts &&
+    env OTHERFLAGS='--admit_smt_queries true' make -C quackyducky $make_opts &&
     make -C quackyducky/tests/layeff $make_opts
 }
 
