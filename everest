@@ -1052,7 +1052,8 @@ build_hacl () {
   # deleting these, make would think that Makefile.basic is more recent than the
   # source files.
   rm -rf hacl-star/dist/*/{Makefile.basic,package.json}
-  OTHERFLAGS='--admit_smt_queries true' make -C hacl-star $make_opts
+  env OTHERFLAGS='--admit_smt_queries true' make -C hacl-star $make_opts &&
+  make -C hacl-star/providers/quic_provider $make_opts
 }
 
 build_everparse () {
